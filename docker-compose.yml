@@ -1,0 +1,9 @@
+version : '3'
+
+services: 
+ parcial-service:
+  build: ./serviceRB
+  volumes:
+   - ./serviceRB:/var/www/html
+  ports:
+   - 8888:80
