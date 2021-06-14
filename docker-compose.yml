@@ -3,7 +3,36 @@ version : '3'
 services: 
  parcial-service:
   build: ./serviceRB
+  networks:
+      - parcial
   volumes:
-   - ./serviceRB:/var/www/html
+   - ./serviceRB:/usr/share/nginx/html
   ports:
    - 8888:80
+  
+ mongo:
+   image: mongo
+   restart: always
+   networks:
+    - parcial
+   volumes:
+    - .databaseRB:/data/db
+   environment:
+     MONGO_INITDB_ROOT_USERNAME: root
+     MONGO_INITDB_ROOT_PASSWORD: test
+     MONGO_HOST: mongo
+     MONGO_DB: parcial
+
+ web:
+   build: ./RailsRB
+   command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+   networks:
+     - parcial
+   volumes:
+     - ./RailsRB:/myapp
+   ports:
+     - 3000:3000
+   depends_on:
+     - mongo
+networks:
+  parcial:
