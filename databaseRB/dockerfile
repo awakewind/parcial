@@ -1,0 +1,5 @@
+#Docker FLDW app
+
+FROM mongo
+
+EXPOSE 27017
