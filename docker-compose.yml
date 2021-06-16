@@ -17,6 +17,8 @@ services:
     - parcial
    volumes:
     - .databaseRB:/data/db
+   ports:
+    - 27017:27017
    environment:
      MONGO_INITDB_ROOT_USERNAME: root
      MONGO_INITDB_ROOT_PASSWORD: test
@@ -34,5 +36,15 @@ services:
      - 3000:3000
    depends_on:
      - mongo
+  
+ cache: 
+   image: redis
+   ports:
+    - 6379:6379
+   restart: always
+   networks:
+     - parcial
+
+
 networks:
   parcial:
