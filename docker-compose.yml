@@ -19,11 +19,6 @@ services:
     - .databaseRB:/data/db
    ports:
     - 27017:27017
-   environment:
-     MONGO_INITDB_ROOT_USERNAME: root
-     MONGO_INITDB_ROOT_PASSWORD: test
-     MONGO_HOST: mongo
-     MONGO_DB: parcial
 
  web:
    build: ./RailsRB
